@@ -1,0 +1,287 @@
+name: taxi-lakehouse
+
+# ── Networks ──────────────────────────────────────────────────────────────────
+networks:
+  taxi-lakehouse:
+    driver: bridge
+
+# ── Volumes ───────────────────────────────────────────────────────────────────
+volumes:
+  minio-data:
+  airflow-data:
+  postgres-data:
+
+# ── Services ──────────────────────────────────────────────────────────────────
+services:
+
+  # ─── PostgreSQL (Airflow Metadata & Pipeline Audit Database) ────────────────
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-16-alpine}
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-airflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-airflow}
+      POSTGRES_DB: ${POSTGRES_DB:-airflow}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-airflow} -d ${POSTGRES_DB:-airflow}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    mem_limit: 512m
+    networks:
+      - taxi-lakehouse
+
+  # ─── MinIO (S3-compatible object store) ────────────────────────────────────
+  minio:
+    image: quay.io/minio/minio:${MINIO_VERSION:-latest}
+    container_name: minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_REGION: ${MINIO_REGION:-us-east-1}
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Web Console
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
+        reservations:
+          memory: 256M
+    mem_limit: 1536m
+    networks:
+      - taxi-lakehouse
+
+  # ─── MinIO Init (one-shot: creates bronze, silver, gold buckets) ─────────
+  minio-init:
+    image: quay.io/minio/mc:${MINIO_MC_VERSION:-latest}
+    restart: on-failure
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_PIPELINE_ACCESS_KEY: ${MINIO_PIPELINE_ACCESS_KEY:-pipeline-access-key}
+      MINIO_PIPELINE_SECRET_KEY: ${MINIO_PIPELINE_SECRET_KEY:-pipeline-secret-key-change-me}
+      MINIO_BUCKET_BRONZE: ${MINIO_BUCKET_BRONZE:-bronze}
+      MINIO_BUCKET_SILVER: ${MINIO_BUCKET_SILVER:-silver}
+      MINIO_BUCKET_GOLD: ${MINIO_BUCKET_GOLD:-gold}
+      MINIO_REGION: ${MINIO_REGION:-us-east-1}
+    volumes:
+      - ./scripts/minio-init.sh:/minio-init.sh:ro
+    entrypoint: ["/bin/sh", "/minio-init.sh"]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    mem_limit: 256m
+    networks:
+      - taxi-lakehouse
+
+  # ─── Trino (Distributed SQL Query Engine) ─────────────────────────────────
+  trino:
+    image: trinodb/trino:${TRINO_VERSION:-465}
+    container_name: trino
+    restart: unless-stopped
+    depends_on:
+      minio:
+        condition: service_healthy
+    ports:
+      - "${TRINO_PORT:-8080}:8080"
+    environment:
+      AWS_REGION: ${MINIO_REGION:-us-east-1}
+    volumes:
+      - ./trino/catalog/delta.properties:/etc/trino/catalog/delta.properties:ro
+    healthcheck:
+      test: ["CMD-SHELL", "/usr/lib/trino/bin/health-check"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+        reservations:
+          memory: 1024M
+    mem_limit: 4096m
+    networks:
+      - taxi-lakehouse
+
+  # ─── Airflow Init (one-shot: setup DB & admin user) ───────────────────────
+  airflow-init:
+    build: .
+    image: taxi-lakehouse-airflow:latest
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-airflow}@postgres:5432/${POSTGRES_DB:-airflow}
+      AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW_SECRET_KEY}
+      AIRFLOW_CONN_TRINO_DEFAULT: trino://trino@trino:8080/delta
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD:-admin123}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-airflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-airflow}
+      POSTGRES_DB: ${POSTGRES_DB:-airflow}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_REGION: ${MINIO_REGION:-us-east-1}
+      MINIO_PIPELINE_ACCESS_KEY: ${MINIO_PIPELINE_ACCESS_KEY:-pipeline-access-key}
+      MINIO_PIPELINE_SECRET_KEY: ${MINIO_PIPELINE_SECRET_KEY:-pipeline-secret-key-change-me}
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        airflow db migrate &&
+        airflow users create \
+          --username admin \
+          --firstname Admin \
+          --lastname User \
+          --role Admin \
+          --email admin@taxi-lakehouse.local \
+          --password "$$_AIRFLOW_WWW_USER_PASSWORD" 2>/dev/null | true &&
+        echo ">>> Airflow init complete"
+    volumes:
+      - airflow-data:/opt/airflow
+      - ./dags:/opt/airflow/dags:ro
+      - ./scripts:/opt/airflow/scripts:ro
+      - ./data:/opt/airflow/data:ro
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+    mem_limit: 1024m
+    networks:
+      - taxi-lakehouse
+
+  # ─── Airflow Webserver ────────────────────────────────────────────────────
+  airflow-webserver:
+    build: .
+    image: taxi-lakehouse-airflow:latest
+    container_name: airflow-webserver
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-airflow}@postgres:5432/${POSTGRES_DB:-airflow}
+      AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW_SECRET_KEY}
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      AIRFLOW_CONN_TRINO_DEFAULT: trino://trino@trino:8080/delta
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-airflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-airflow}
+      POSTGRES_DB: ${POSTGRES_DB:-airflow}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_REGION: ${MINIO_REGION:-us-east-1}
+      MINIO_PIPELINE_ACCESS_KEY: ${MINIO_PIPELINE_ACCESS_KEY:-pipeline-access-key}
+      MINIO_PIPELINE_SECRET_KEY: ${MINIO_PIPELINE_SECRET_KEY:-pipeline-secret-key-change-me}
+      SPARK_MASTER: ${SPARK_MASTER:-local[2]}
+      SPARK_DRIVER_MEMORY: ${SPARK_DRIVER_MEMORY:-2g}
+    command: webserver
+    ports:
+      - "${AIRFLOW_PORT:-8090}:8080"
+    volumes:
+      - airflow-data:/opt/airflow
+      - ./dags:/opt/airflow/dags:ro
+      - ./scripts:/opt/airflow/scripts:ro
+      - ./data:/opt/airflow/data:ro
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+        reservations:
+          memory: 256M
+    mem_limit: 768m
+    networks:
+      - taxi-lakehouse
+
+  # ─── Airflow Scheduler ────────────────────────────────────────────────────
+  airflow-scheduler:
+    build: .
+    image: taxi-lakehouse-airflow:latest
+    container_name: airflow-scheduler
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-airflow}@postgres:5432/${POSTGRES_DB:-airflow}
+      AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__SCHEDULER__CATCHUP_BY_DEFAULT: "false"
+      AIRFLOW_CONN_TRINO_DEFAULT: trino://trino@trino:8080/delta
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-airflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-airflow}
+      POSTGRES_DB: ${POSTGRES_DB:-airflow}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_REGION: ${MINIO_REGION:-us-east-1}
+      MINIO_PIPELINE_ACCESS_KEY: ${MINIO_PIPELINE_ACCESS_KEY:-pipeline-access-key}
+      MINIO_PIPELINE_SECRET_KEY: ${MINIO_PIPELINE_SECRET_KEY:-pipeline-secret-key-change-me}
+      SPARK_MASTER: ${SPARK_MASTER:-local[2]}
+      SPARK_DRIVER_MEMORY: ${SPARK_DRIVER_MEMORY:-2g}
+    command: scheduler
+    volumes:
+      - airflow-data:/opt/airflow
+      - ./dags:/opt/airflow/dags:ro
+      - ./scripts:/opt/airflow/scripts:ro
+      - ./data:/opt/airflow/data:ro
+    deploy:
+      resources:
+        limits:
+          memory: 3584M
+        reservations:
+          memory: 1024M
+    mem_limit: 3584m
+    networks:
+      - taxi-lakehouse
+

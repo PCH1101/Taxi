@@ -1,0 +1,102 @@
+{
+  "demand_model": {
+    "model_type": "LightGBM Regressor (L1 loss)",
+    "test_r2": 0.9743,
+    "test_mae": 282.46,
+    "test_rmse": 403.5,
+    "test_mape_percent": 13.72,
+    "top_10_features": [
+      {
+        "feature": "demand_lag_1h",
+        "importance": 1183
+      },
+      {
+        "feature": "demand_lag_168h",
+        "importance": 1059
+      },
+      {
+        "feature": "pickup_hour",
+        "importance": 950
+      },
+      {
+        "feature": "revenue_lag_168h",
+        "importance": 861
+      },
+      {
+        "feature": "wind_speed_10m",
+        "importance": 774
+      },
+      {
+        "feature": "demand_lag_24h",
+        "importance": 714
+      },
+      {
+        "feature": "revenue_lag_1h",
+        "importance": 695
+      },
+      {
+        "feature": "temp_range_day",
+        "importance": 686
+      },
+      {
+        "feature": "demand_rolling_mean_24h",
+        "importance": 663
+      },
+      {
+        "feature": "revenue_rolling_mean_24h",
+        "importance": 630
+      }
+    ]
+  },
+  "revenue_model": {
+    "model_type": "LightGBM Regressor (Huber loss)",
+    "test_r2": 0.9525,
+    "test_mae": 11365.24,
+    "test_rmse": 17094.33,
+    "test_mape_percent": 15.7,
+    "top_10_features": [
+      {
+        "feature": "pickup_hour",
+        "importance": 737
+      },
+      {
+        "feature": "revenue_lag_1h",
+        "importance": 535
+      },
+      {
+        "feature": "revenue_lag_168h",
+        "importance": 482
+      },
+      {
+        "feature": "demand_lag_1h",
+        "importance": 453
+      },
+      {
+        "feature": "revenue_rolling_mean_24h",
+        "importance": 442
+      },
+      {
+        "feature": "temperature_2m",
+        "importance": 325
+      },
+      {
+        "feature": "revenue_lag_24h",
+        "importance": 297
+      },
+      {
+        "feature": "wind_speed_10m",
+        "importance": 262
+      },
+      {
+        "feature": "temp_delta_1h",
+        "importance": 250
+      },
+      {
+        "feature": "demand_rolling_mean_24h",
+        "importance": 230
+      }
+    ]
+  },
+  "features_count": 36,
+  "test_period": "2025-12-01 to 2025-12-31"
+}

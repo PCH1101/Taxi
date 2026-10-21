@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7fdc4c26e7ecfa5d30391324bfaa8f6b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_7fdc4c26e7ecfa5d30391324bfaa8f6b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7fdc4c26e7ecfa5d30391324bfaa8f6b = L.map(
+                "map_7fdc4c26e7ecfa5d30391324bfaa8f6b",
+                {
+                    center: [40.7484, -73.9857],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_92ea4bb782013552aaf5092cfbf75bb7 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\u0027https://www.openstreetmap.org/copyright\u0027\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\u0027https://carto.com/attributions\u0027\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_92ea4bb782013552aaf5092cfbf75bb7.addTo(map_7fdc4c26e7ecfa5d30391324bfaa8f6b);
+        
+    
+            var tile_layer_474a4db8220e1455f938796db5b0c6c8 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\u0027https://www.openstreetmap.org/copyright\u0027\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\u0027https://carto.com/attributions\u0027\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_474a4db8220e1455f938796db5b0c6c8.addTo(map_7fdc4c26e7ecfa5d30391324bfaa8f6b);
+        
+    
+            var tile_layer_3514df4d34b457474c4e27c2e46f4f2b = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Tiles \u0026copy; Esri \u0026mdash; Source: Esri, DeLorme, NAVTEQ",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3514df4d34b457474c4e27c2e46f4f2b.addTo(map_7fdc4c26e7ecfa5d30391324bfaa8f6b);
+        
+    
+            var heat_map_c68b3bc2f9f36263227a8e140b0e48fb = L.heatLayer(
+                [[40.748, -74.001, 965840.0], [40.738, -74.008, 320840.0], [40.7553, -73.9784, 1765380.0], [40.745, -73.978, 1024257.0], [40.765, -73.954, 713275.0], [40.72, -73.998, 357679.0], [40.7505, -73.991, 1352944.0], [40.719, -74.01, 466439.0], [40.745, -73.945, 14680.0], [40.702, -74.016, 12369.0], [40.785, -73.976, 947866.0], [40.793, -73.971, 644064.0], [40.718, -73.962, 12864.0], [40.722, -73.957, 9858.0], [40.693, -73.99, 20970.0], [40.76, -73.992, 875614.0], [40.7, -73.987, 14669.0], [40.752, -74.004, 629138.0], [40.737, -73.984, 683188.0], [40.754, -73.964, 608739.0], [40.7533, -73.9724, 1314301.0], [40.761, -73.9805, 1053046.0], [40.7628, -73.9587, 824901.0], [40.707, -74.009, 190566.0], [40.727, -74.0, 505217.0], [40.728, -73.987, 770292.0], [40.73, -73.999, 500782.0], [40.758, -73.9855, 1237956.0], [40.7408, -73.9896, 996983.0], [40.7681, -73.9634, 1871152.0], [40.749, -73.968, 378368.0], [40.715, -73.94, 8308.0], [40.69, -73.995, 15950.0], [40.765, -73.925, 15875.0], [40.6895, -74.1745, 1337.0], [40.7753, -73.9818, 1145794.0], [40.734, -74.003, 760367.0], [40.7781, -73.9554, 1584605.0], [40.6413, -73.7781, 1881924.0], [40.7769, -73.874, 1227190.0], [40.704, -74.013, 103193.0], [40.778, -73.988, 357763.0]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 14,
+  "radius": 22,
+  "blur": 15,
+}
+            );
+        
+    
+            heat_map_c68b3bc2f9f36263227a8e140b0e48fb.addTo(map_7fdc4c26e7ecfa5d30391324bfaa8f6b);
+        
+    
+            var feature_group_4d69f8409c1a12c72c59da521046be7e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_a3a7b3ac923e10867f6e800fe7c51d16 = L.circleMarker(
+                [40.748, -74.001],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.438933333333333, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_261408aa3fa8b13194eaa9dfd275dc1d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_716f651e6c273d62aecdca675b2667a1 = $(`<div id="html_716f651e6c273d62aecdca675b2667a1" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: East Chelsea</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 48,425)</span><br>                 <b>Total Pickups:</b> 965,840<br>                 <b>Total Dropoffs:</b> 917,415<br>                 <b>Net Flow:</b> -48,425<br>                 <b>Avg Fare:</b> $26.49             </div>             </div>`)[0];
+                popup_261408aa3fa8b13194eaa9dfd275dc1d.setContent(html_716f651e6c273d62aecdca675b2667a1);
+            
+        
+
+        circle_marker_a3a7b3ac923e10867f6e800fe7c51d16.bindPopup(popup_261408aa3fa8b13194eaa9dfd275dc1d)
+        ;
+
+        
+    
+    
+            var circle_marker_774cb56abf5eeb62844faccda76d1708 = L.circleMarker(
+                [40.738, -74.008],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_dade2291853ad23dd7a27d3baccc046a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f2dd4b10b4010ee09fa16dcdff28cba4 = $(`<div id="html_f2dd4b10b4010ee09fa16dcdff28cba4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Meatpacking/West Village West</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 51,114)</span><br>                 <b>Total Pickups:</b> 320,840<br>                 <b>Total Dropoffs:</b> 371,954<br>                 <b>Net Flow:</b> +51,114<br>                 <b>Avg Fare:</b> $26.09             </div>             </div>`)[0];
+                popup_dade2291853ad23dd7a27d3baccc046a.setContent(html_f2dd4b10b4010ee09fa16dcdff28cba4);
+            
+        
+
+        circle_marker_774cb56abf5eeb62844faccda76d1708.bindPopup(popup_dade2291853ad23dd7a27d3baccc046a)
+        ;
+
+        
+    
+    
+            var circle_marker_8f917e2e83bba34fddd2ace219b47081 = L.circleMarker(
+                [40.7553, -73.9784],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.7692, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_bf24bee55c2e7ce81ddc2323a152910e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_75029fc77ad80e7ae9ba9df5b1a743b5 = $(`<div id="html_75029fc77ad80e7ae9ba9df5b1a743b5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Midtown Center</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 374,370)</span><br>                 <b>Total Pickups:</b> 1,765,380<br>                 <b>Total Dropoffs:</b> 1,391,010<br>                 <b>Net Flow:</b> -374,370<br>                 <b>Avg Fare:</b> $26.25             </div>             </div>`)[0];
+                popup_bf24bee55c2e7ce81ddc2323a152910e.setContent(html_75029fc77ad80e7ae9ba9df5b1a743b5);
+            
+        
+
+        circle_marker_8f917e2e83bba34fddd2ace219b47081.bindPopup(popup_bf24bee55c2e7ce81ddc2323a152910e)
+        ;
+
+        
+    
+    
+            var circle_marker_552dff96de3eaec090866c707d3e614a = L.circleMarker(
+                [40.745, -73.978],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.82838, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_9b9180a26e5c686ae3505392495e7641 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_84214cfd2b9af500ca2d304281fc40bd = $(`<div id="html_84214cfd2b9af500ca2d304281fc40bd" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Murray Hill</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 15,712)</span><br>                 <b>Total Pickups:</b> 1,024,257<br>                 <b>Total Dropoffs:</b> 1,039,969<br>                 <b>Net Flow:</b> +15,712<br>                 <b>Avg Fare:</b> $24.70             </div>             </div>`)[0];
+                popup_9b9180a26e5c686ae3505392495e7641.setContent(html_84214cfd2b9af500ca2d304281fc40bd);
+            
+        
+
+        circle_marker_552dff96de3eaec090866c707d3e614a.bindPopup(popup_9b9180a26e5c686ae3505392495e7641)
+        ;
+
+        
+    
+    
+            var circle_marker_e9ca643f852df0057a7a1c42871533ed = L.circleMarker(
+                [40.765, -73.954],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_0bf554dbd0d4c4d27a0c6c413e440626 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_156d7c415c2dad3e29f1543e5b3ce6f1 = $(`<div id="html_156d7c415c2dad3e29f1543e5b3ce6f1" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Lenox Hill East</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 17,711)</span><br>                 <b>Total Pickups:</b> 713,275<br>                 <b>Total Dropoffs:</b> 730,986<br>                 <b>Net Flow:</b> +17,711<br>                 <b>Avg Fare:</b> $23.33             </div>             </div>`)[0];
+                popup_0bf554dbd0d4c4d27a0c6c413e440626.setContent(html_156d7c415c2dad3e29f1543e5b3ce6f1);
+            
+        
+
+        circle_marker_e9ca643f852df0057a7a1c42871533ed.bindPopup(popup_0bf554dbd0d4c4d27a0c6c413e440626)
+        ;
+
+        
+    
+    
+            var circle_marker_6c54663fcdd381346514718e87eb3c00 = L.circleMarker(
+                [40.72, -73.998],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_83ef7479961f328022a3a78381804862 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f0836d080de0980f99e4ddb7ab333bbc = $(`<div id="html_f0836d080de0980f99e4ddb7ab333bbc" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Little Italy/NoLiTa</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 19,708)</span><br>                 <b>Total Pickups:</b> 357,679<br>                 <b>Total Dropoffs:</b> 337,971<br>                 <b>Net Flow:</b> -19,708<br>                 <b>Avg Fare:</b> $25.31             </div>             </div>`)[0];
+                popup_83ef7479961f328022a3a78381804862.setContent(html_f0836d080de0980f99e4ddb7ab333bbc);
+            
+        
+
+        circle_marker_6c54663fcdd381346514718e87eb3c00.bindPopup(popup_83ef7479961f328022a3a78381804862)
+        ;
+
+        
+    
+    
+            var circle_marker_72e379ee4466802e82ecb875481ad667 = L.circleMarker(
+                [40.7505, -73.991],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.019626666666667, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_f138641eb662dfd2eebd775c3fb0879b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ce923cf94e7c7d81a0c6febbcf1d1677 = $(`<div id="html_ce923cf94e7c7d81a0c6febbcf1d1677" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Penn Station/Madison Sq West</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 565,313)</span><br>                 <b>Total Pickups:</b> 1,352,944<br>                 <b>Total Dropoffs:</b> 787,631<br>                 <b>Net Flow:</b> -565,313<br>                 <b>Avg Fare:</b> $25.90             </div>             </div>`)[0];
+                popup_f138641eb662dfd2eebd775c3fb0879b.setContent(html_ce923cf94e7c7d81a0c6febbcf1d1677);
+            
+        
+
+        circle_marker_72e379ee4466802e82ecb875481ad667.bindPopup(popup_f138641eb662dfd2eebd775c3fb0879b)
+        ;
+
+        
+    
+    
+            var circle_marker_2c934fc87597450332bf1bc53ba2c866 = L.circleMarker(
+                [40.719, -74.01],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_22f09c96d9560af90cfef8c6e6e37f66 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c5bddc789d30fdd96ea2a1abd2afc341 = $(`<div id="html_c5bddc789d30fdd96ea2a1abd2afc341" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: TriBeCa/Civic Center</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 102,902)</span><br>                 <b>Total Pickups:</b> 466,439<br>                 <b>Total Dropoffs:</b> 569,341<br>                 <b>Net Flow:</b> +102,902<br>                 <b>Avg Fare:</b> $27.83             </div>             </div>`)[0];
+                popup_22f09c96d9560af90cfef8c6e6e37f66.setContent(html_c5bddc789d30fdd96ea2a1abd2afc341);
+            
+        
+
+        circle_marker_2c934fc87597450332bf1bc53ba2c866.bindPopup(popup_22f09c96d9560af90cfef8c6e6e37f66)
+        ;
+
+        
+    
+    
+            var circle_marker_28896a1bbb8e5ebf64da3a379297730c = L.circleMarker(
+                [40.745, -73.945],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_4dc133f32bc8f337b41f883d98b395c2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6669e20df0c3e9d42f0527bd99795b6b = $(`<div id="html_6669e20df0c3e9d42f0527bd99795b6b" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Queens: Long Island City/Queens Plaza</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 12,018)</span><br>                 <b>Total Pickups:</b> 14,680<br>                 <b>Total Dropoffs:</b> 26,698<br>                 <b>Net Flow:</b> +12,018<br>                 <b>Avg Fare:</b> $30.39             </div>             </div>`)[0];
+                popup_4dc133f32bc8f337b41f883d98b395c2.setContent(html_6669e20df0c3e9d42f0527bd99795b6b);
+            
+        
+
+        circle_marker_28896a1bbb8e5ebf64da3a379297730c.bindPopup(popup_4dc133f32bc8f337b41f883d98b395c2)
+        ;
+
+        
+    
+    
+            var circle_marker_fabea2c4c28dee7409f528b6367df949 = L.circleMarker(
+                [40.702, -74.016],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_a257656d568df697f282b65dc79839c7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_902c7758849b235ed3e738fe771e286f = $(`<div id="html_902c7758849b235ed3e738fe771e286f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Battery Park</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 6,646)</span><br>                 <b>Total Pickups:</b> 12,369<br>                 <b>Total Dropoffs:</b> 19,015<br>                 <b>Net Flow:</b> +6,646<br>                 <b>Avg Fare:</b> $34.01             </div>             </div>`)[0];
+                popup_a257656d568df697f282b65dc79839c7.setContent(html_902c7758849b235ed3e738fe771e286f);
+            
+        
+
+        circle_marker_fabea2c4c28dee7409f528b6367df949.bindPopup(popup_a257656d568df697f282b65dc79839c7)
+        ;
+
+        
+    
+    
+            var circle_marker_da53dcf8fa114fa8b893ebe93a707437 = L.circleMarker(
+                [40.785, -73.976],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.319106666666666, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_7da4ed483ecf05b2640262a768c0fec4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3c7927478614a457e615fdc9f382f097 = $(`<div id="html_3c7927478614a457e615fdc9f382f097" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Upper West Side South</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 55,836)</span><br>                 <b>Total Pickups:</b> 947,866<br>                 <b>Total Dropoffs:</b> 1,003,702<br>                 <b>Net Flow:</b> +55,836<br>                 <b>Avg Fare:</b> $21.92             </div>             </div>`)[0];
+                popup_7da4ed483ecf05b2640262a768c0fec4.setContent(html_3c7927478614a457e615fdc9f382f097);
+            
+        
+
+        circle_marker_da53dcf8fa114fa8b893ebe93a707437.bindPopup(popup_7da4ed483ecf05b2640262a768c0fec4)
+        ;
+
+        
+    
+    
+            var circle_marker_62e9ddf72737d136346d9376a21a5205 = L.circleMarker(
+                [40.793, -73.971],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_8dc6b94ae1c425da934340e9f3e3ebb8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4187b6531ba1761120dc32581e6df7c5 = $(`<div id="html_4187b6531ba1761120dc32581e6df7c5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Upper West Side North</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 144,161)</span><br>                 <b>Total Pickups:</b> 644,064<br>                 <b>Total Dropoffs:</b> 788,225<br>                 <b>Net Flow:</b> +144,161<br>                 <b>Avg Fare:</b> $21.40             </div>             </div>`)[0];
+                popup_8dc6b94ae1c425da934340e9f3e3ebb8.setContent(html_4187b6531ba1761120dc32581e6df7c5);
+            
+        
+
+        circle_marker_62e9ddf72737d136346d9376a21a5205.bindPopup(popup_8dc6b94ae1c425da934340e9f3e3ebb8)
+        ;
+
+        
+    
+    
+            var circle_marker_996ad32272a2bce45f8fe649ebb67085 = L.circleMarker(
+                [40.718, -73.962],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_4721d4787fd7725d4f1d4cb908ebab93 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a55b95233e32241a3486f96e1476a277 = $(`<div id="html_a55b95233e32241a3486f96e1476a277" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Brooklyn: Williamsburg (North Side)</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 77,734)</span><br>                 <b>Total Pickups:</b> 12,864<br>                 <b>Total Dropoffs:</b> 90,598<br>                 <b>Net Flow:</b> +77,734<br>                 <b>Avg Fare:</b> $28.81             </div>             </div>`)[0];
+                popup_4721d4787fd7725d4f1d4cb908ebab93.setContent(html_a55b95233e32241a3486f96e1476a277);
+            
+        
+
+        circle_marker_996ad32272a2bce45f8fe649ebb67085.bindPopup(popup_4721d4787fd7725d4f1d4cb908ebab93)
+        ;
+
+        
+    
+    
+            var circle_marker_7d171c433d43133842571691fee273b8 = L.circleMarker(
+                [40.722, -73.957],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_52164be3daf30caedcf5fab862ddea78 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_dfaf54851edc5bd19515c3fb9154103e = $(`<div id="html_dfaf54851edc5bd19515c3fb9154103e" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Brooklyn: Williamsburg (South Side)</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 68,804)</span><br>                 <b>Total Pickups:</b> 9,858<br>                 <b>Total Dropoffs:</b> 78,662<br>                 <b>Net Flow:</b> +68,804<br>                 <b>Avg Fare:</b> $33.93             </div>             </div>`)[0];
+                popup_52164be3daf30caedcf5fab862ddea78.setContent(html_dfaf54851edc5bd19515c3fb9154103e);
+            
+        
+
+        circle_marker_7d171c433d43133842571691fee273b8.bindPopup(popup_52164be3daf30caedcf5fab862ddea78)
+        ;
+
+        
+    
+    
+            var circle_marker_d8be65fe6e9476d6342076c334c44a34 = L.circleMarker(
+                [40.693, -73.99],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_027a8d2d22147669396c4323249185aa = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6574226f7be79ef03c82f9c922b8589f = $(`<div id="html_6574226f7be79ef03c82f9c922b8589f" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Brooklyn: Crown Heights North</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 39,283)</span><br>                 <b>Total Pickups:</b> 20,970<br>                 <b>Total Dropoffs:</b> 60,253<br>                 <b>Net Flow:</b> +39,283<br>                 <b>Avg Fare:</b> $30.02             </div>             </div>`)[0];
+                popup_027a8d2d22147669396c4323249185aa.setContent(html_6574226f7be79ef03c82f9c922b8589f);
+            
+        
+
+        circle_marker_d8be65fe6e9476d6342076c334c44a34.bindPopup(popup_027a8d2d22147669396c4323249185aa)
+        ;
+
+        
+    
+    
+            var circle_marker_bc7a24bfe805cbe085e9dc5160b69b9c = L.circleMarker(
+                [40.76, -73.992],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.8374266666666665, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_e1d4a811e22834d6dfae07d8c620d37e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0f268ddbb8b3ecde9988358a42c9ea44 = $(`<div id="html_0f268ddbb8b3ecde9988358a42c9ea44" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Clinton East</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 40,291)</span><br>                 <b>Total Pickups:</b> 875,614<br>                 <b>Total Dropoffs:</b> 835,323<br>                 <b>Net Flow:</b> -40,291<br>                 <b>Avg Fare:</b> $24.34             </div>             </div>`)[0];
+                popup_e1d4a811e22834d6dfae07d8c620d37e.setContent(html_0f268ddbb8b3ecde9988358a42c9ea44);
+            
+        
+
+        circle_marker_bc7a24bfe805cbe085e9dc5160b69b9c.bindPopup(popup_e1d4a811e22834d6dfae07d8c620d37e)
+        ;
+
+        
+    
+    
+            var circle_marker_3f3d54e8c33712429300827e3268e293 = L.circleMarker(
+                [40.7, -73.987],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_e002527c61e872a35d601e4f07c7e585 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_293070bc272215fe437ded4308b2d559 = $(`<div id="html_293070bc272215fe437ded4308b2d559" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Brooklyn: DUMBO/Vinegar Hill</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 39,145)</span><br>                 <b>Total Pickups:</b> 14,669<br>                 <b>Total Dropoffs:</b> 53,814<br>                 <b>Net Flow:</b> +39,145<br>                 <b>Avg Fare:</b> $33.25             </div>             </div>`)[0];
+                popup_e002527c61e872a35d601e4f07c7e585.setContent(html_293070bc272215fe437ded4308b2d559);
+            
+        
+
+        circle_marker_3f3d54e8c33712429300827e3268e293.bindPopup(popup_e002527c61e872a35d601e4f07c7e585)
+        ;
+
+        
+    
+    
+            var circle_marker_07846a13ba5830638be596c374367627 = L.circleMarker(
+                [40.752, -74.004],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_7ee744fe36aadfd5a4cbd9452673e451 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_975220f61f28e4f5e4781a406af9a306 = $(`<div id="html_975220f61f28e4f5e4781a406af9a306" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: West Chelsea/Hudson Yards</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 69,560)</span><br>                 <b>Total Pickups:</b> 629,138<br>                 <b>Total Dropoffs:</b> 698,698<br>                 <b>Net Flow:</b> +69,560<br>                 <b>Avg Fare:</b> $25.48             </div>             </div>`)[0];
+                popup_7ee744fe36aadfd5a4cbd9452673e451.setContent(html_975220f61f28e4f5e4781a406af9a306);
+            
+        
+
+        circle_marker_07846a13ba5830638be596c374367627.bindPopup(popup_7ee744fe36aadfd5a4cbd9452673e451)
+        ;
+
+        
+    
+    
+            var circle_marker_d4c690167108ffb0c06358b51fd9ddf3 = L.circleMarker(
+                [40.737, -73.984],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_33b64e602f84605839209250064035e7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e2fce9338f8c378cb3c2d236fe40a675 = $(`<div id="html_e2fce9338f8c378cb3c2d236fe40a675" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Gramercy</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 187)</span><br>                 <b>Total Pickups:</b> 683,188<br>                 <b>Total Dropoffs:</b> 683,375<br>                 <b>Net Flow:</b> +187<br>                 <b>Avg Fare:</b> $23.26             </div>             </div>`)[0];
+                popup_33b64e602f84605839209250064035e7.setContent(html_e2fce9338f8c378cb3c2d236fe40a675);
+            
+        
+
+        circle_marker_d4c690167108ffb0c06358b51fd9ddf3.bindPopup(popup_33b64e602f84605839209250064035e7)
+        ;
+
+        
+    
+    
+            var circle_marker_0bb6765c2738240f24168b148b986639 = L.circleMarker(
+                [40.754, -73.964],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_4af9eb2749cf08423b93ebc0b003613d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bb407b04d69486c851bc3ebb52c91dbd = $(`<div id="html_bb407b04d69486c851bc3ebb52c91dbd" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Sutton Place/Turtle Bay North</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 143,105)</span><br>                 <b>Total Pickups:</b> 608,739<br>                 <b>Total Dropoffs:</b> 751,844<br>                 <b>Net Flow:</b> +143,105<br>                 <b>Avg Fare:</b> $23.22             </div>             </div>`)[0];
+                popup_4af9eb2749cf08423b93ebc0b003613d.setContent(html_bb407b04d69486c851bc3ebb52c91dbd);
+            
+        
+
+        circle_marker_0bb6765c2738240f24168b148b986639.bindPopup(popup_4af9eb2749cf08423b93ebc0b003613d)
+        ;
+
+        
+    
+    
+            var circle_marker_689902abd196cf371478a4391d764aea = L.circleMarker(
+                [40.7533, -73.9724],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.762006666666666, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_8888e295c9ae6cf794091b0874a1da47 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_70744c57283319ee7c87d2ab8dcfb9c7 = $(`<div id="html_70744c57283319ee7c87d2ab8dcfb9c7" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Midtown East</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 287,456)</span><br>                 <b>Total Pickups:</b> 1,314,301<br>                 <b>Total Dropoffs:</b> 1,026,845<br>                 <b>Net Flow:</b> -287,456<br>                 <b>Avg Fare:</b> $25.17             </div>             </div>`)[0];
+                popup_8888e295c9ae6cf794091b0874a1da47.setContent(html_70744c57283319ee7c87d2ab8dcfb9c7);
+            
+        
+
+        circle_marker_689902abd196cf371478a4391d764aea.bindPopup(popup_8888e295c9ae6cf794091b0874a1da47)
+        ;
+
+        
+    
+    
+            var circle_marker_cab2b863ed1fdeb6954c0541271ee2c0 = L.circleMarker(
+                [40.761, -73.9805],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0203066666666665, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_808c29292760c6282e953bac4a353e7c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9dbfa55a74fb44895548fde72133ba6c = $(`<div id="html_9dbfa55a74fb44895548fde72133ba6c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Midtown North</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 132,214)</span><br>                 <b>Total Pickups:</b> 1,053,046<br>                 <b>Total Dropoffs:</b> 920,832<br>                 <b>Net Flow:</b> -132,214<br>                 <b>Avg Fare:</b> $25.78             </div>             </div>`)[0];
+                popup_808c29292760c6282e953bac4a353e7c.setContent(html_9dbfa55a74fb44895548fde72133ba6c);
+            
+        
+
+        circle_marker_cab2b863ed1fdeb6954c0541271ee2c0.bindPopup(popup_808c29292760c6282e953bac4a353e7c)
+        ;
+
+        
+    
+    
+            var circle_marker_06ab5e8103e2eb02048adc1a9df8bba7 = L.circleMarker(
+                [40.7628, -73.9587],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.49934, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_fd3c85d988432e48904f21c3f7653341 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5091937a01c4c1adccb51692eb7b10e5 = $(`<div id="html_5091937a01c4c1adccb51692eb7b10e5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Lenox Hill West</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 127,801)</span><br>                 <b>Total Pickups:</b> 824,901<br>                 <b>Total Dropoffs:</b> 952,702<br>                 <b>Net Flow:</b> +127,801<br>                 <b>Avg Fare:</b> $20.89             </div>             </div>`)[0];
+                popup_fd3c85d988432e48904f21c3f7653341.setContent(html_5091937a01c4c1adccb51692eb7b10e5);
+            
+        
+
+        circle_marker_06ab5e8103e2eb02048adc1a9df8bba7.bindPopup(popup_fd3c85d988432e48904f21c3f7653341)
+        ;
+
+        
+    
+    
+            var circle_marker_80bb6719cdb9d718b47cafb5a43c2cbf = L.circleMarker(
+                [40.707, -74.009],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_e0be0a0ad62b3daf696bdee976415d93 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0bedf9c1359f570e29f8706dcb378854 = $(`<div id="html_0bedf9c1359f570e29f8706dcb378854" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Financial District North</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 89,145)</span><br>                 <b>Total Pickups:</b> 190,566<br>                 <b>Total Dropoffs:</b> 279,711<br>                 <b>Net Flow:</b> +89,145<br>                 <b>Avg Fare:</b> $32.82             </div>             </div>`)[0];
+                popup_e0be0a0ad62b3daf696bdee976415d93.setContent(html_0bedf9c1359f570e29f8706dcb378854);
+            
+        
+
+        circle_marker_80bb6719cdb9d718b47cafb5a43c2cbf.bindPopup(popup_e0be0a0ad62b3daf696bdee976415d93)
+        ;
+
+        
+    
+    
+            var circle_marker_310d2067cad4186085fc38cb8895db8a = L.circleMarker(
+                [40.727, -74.0],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_7b5bba7c3aa7f57b9c1eac2caf912d05 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c02e9558d24a7fb42be051b4051fd99d = $(`<div id="html_c02e9558d24a7fb42be051b4051fd99d" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Greenwich Village South</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 153,969)</span><br>                 <b>Total Pickups:</b> 505,217<br>                 <b>Total Dropoffs:</b> 351,248<br>                 <b>Net Flow:</b> -153,969<br>                 <b>Avg Fare:</b> $23.83             </div>             </div>`)[0];
+                popup_7b5bba7c3aa7f57b9c1eac2caf912d05.setContent(html_c02e9558d24a7fb42be051b4051fd99d);
+            
+        
+
+        circle_marker_310d2067cad4186085fc38cb8895db8a.bindPopup(popup_7b5bba7c3aa7f57b9c1eac2caf912d05)
+        ;
+
+        
+    
+    
+            var circle_marker_3718252854790b71916915f46c72ef21 = L.circleMarker(
+                [40.728, -73.987],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.13528, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_6e70e4da39286ee39d735c4ce67619b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_062e279c37d7b3a153140d41c8b5281c = $(`<div id="html_062e279c37d7b3a153140d41c8b5281c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: East Village</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 75,202)</span><br>                 <b>Total Pickups:</b> 770,292<br>                 <b>Total Dropoffs:</b> 695,090<br>                 <b>Net Flow:</b> -75,202<br>                 <b>Avg Fare:</b> $23.58             </div>             </div>`)[0];
+                popup_6e70e4da39286ee39d735c4ce67619b4.setContent(html_062e279c37d7b3a153140d41c8b5281c);
+            
+        
+
+        circle_marker_3718252854790b71916915f46c72ef21.bindPopup(popup_6e70e4da39286ee39d735c4ce67619b4)
+        ;
+
+        
+    
+    
+            var circle_marker_8e77792605b5b1a93e230f8357c5620c = L.circleMarker(
+                [40.73, -73.999],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_7223bd263854d5bd3ff78ae48340c7dd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9acdd2407accae10d0753b76ec3f21cf = $(`<div id="html_9acdd2407accae10d0753b76ec3f21cf" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Greenwich Village North</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 37,222)</span><br>                 <b>Total Pickups:</b> 500,782<br>                 <b>Total Dropoffs:</b> 463,560<br>                 <b>Net Flow:</b> -37,222<br>                 <b>Avg Fare:</b> $23.23             </div>             </div>`)[0];
+                popup_7223bd263854d5bd3ff78ae48340c7dd.setContent(html_9acdd2407accae10d0753b76ec3f21cf);
+            
+        
+
+        circle_marker_8e77792605b5b1a93e230f8357c5620c.bindPopup(popup_7223bd263854d5bd3ff78ae48340c7dd)
+        ;
+
+        
+    
+    
+            var circle_marker_a4423f27e4c0b735d4507600ce799ed4 = L.circleMarker(
+                [40.758, -73.9855],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25304, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_9b0c3b3b9d818f824a89c451c656b189 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cf4681454c3e719c3c9b3cbb3ea5cc90 = $(`<div id="html_cf4681454c3e719c3c9b3cbb3ea5cc90" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Times Sq/Theatre District</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 116,368)</span><br>                 <b>Total Pickups:</b> 1,237,956<br>                 <b>Total Dropoffs:</b> 1,121,588<br>                 <b>Net Flow:</b> -116,368<br>                 <b>Avg Fare:</b> $29.13             </div>             </div>`)[0];
+                popup_9b0c3b3b9d818f824a89c451c656b189.setContent(html_cf4681454c3e719c3c9b3cbb3ea5cc90);
+            
+        
+
+        circle_marker_a4423f27e4c0b735d4507600ce799ed4.bindPopup(popup_9b0c3b3b9d818f824a89c451c656b189)
+        ;
+
+        
+    
+    
+            var circle_marker_9d0b340eb854473e19bcd9a2ed8e3b6e = L.circleMarker(
+                [40.7408, -73.9896],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.646553333333333, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_f3c11bfeff12d8fa122bf018b68df7b9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3b139638aaa00abbd4a1ab6ec606609a = $(`<div id="html_3b139638aaa00abbd4a1ab6ec606609a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Union Sq</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 109,349)</span><br>                 <b>Total Pickups:</b> 996,983<br>                 <b>Total Dropoffs:</b> 887,634<br>                 <b>Net Flow:</b> -109,349<br>                 <b>Avg Fare:</b> $23.43             </div>             </div>`)[0];
+                popup_f3c11bfeff12d8fa122bf018b68df7b9.setContent(html_3b139638aaa00abbd4a1ab6ec606609a);
+            
+        
+
+        circle_marker_9d0b340eb854473e19bcd9a2ed8e3b6e.bindPopup(popup_f3c11bfeff12d8fa122bf018b68df7b9)
+        ;
+
+        
+    
+    
+            var circle_marker_f8acd15c6f25c9abe4e153318d09fea2 = L.circleMarker(
+                [40.7681, -73.9634],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.474346666666667, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_beb93e262c7f1905876276afea6cefdc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_33d9a0e7a92312c2fde2bd0f34a808b8 = $(`<div id="html_33d9a0e7a92312c2fde2bd0f34a808b8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Upper East Side South</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 215,273)</span><br>                 <b>Total Pickups:</b> 1,871,152<br>                 <b>Total Dropoffs:</b> 1,655,879<br>                 <b>Net Flow:</b> -215,273<br>                 <b>Avg Fare:</b> $21.01             </div>             </div>`)[0];
+                popup_beb93e262c7f1905876276afea6cefdc.setContent(html_33d9a0e7a92312c2fde2bd0f34a808b8);
+            
+        
+
+        circle_marker_f8acd15c6f25c9abe4e153318d09fea2.bindPopup(popup_beb93e262c7f1905876276afea6cefdc)
+        ;
+
+        
+    
+    
+            var circle_marker_23f05155479e83d02b5c936fde1c7d63 = L.circleMarker(
+                [40.749, -73.968],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_d48c79289c7d3207633467af1dfd273b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d12f5bfb2953355863efc5e8971f8ec3 = $(`<div id="html_d12f5bfb2953355863efc5e8971f8ec3" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: UN/Turtle Bay South</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 140,678)</span><br>                 <b>Total Pickups:</b> 378,368<br>                 <b>Total Dropoffs:</b> 519,046<br>                 <b>Net Flow:</b> +140,678<br>                 <b>Avg Fare:</b> $26.09             </div>             </div>`)[0];
+                popup_d48c79289c7d3207633467af1dfd273b.setContent(html_d12f5bfb2953355863efc5e8971f8ec3);
+            
+        
+
+        circle_marker_23f05155479e83d02b5c936fde1c7d63.bindPopup(popup_d48c79289c7d3207633467af1dfd273b)
+        ;
+
+        
+    
+    
+            var circle_marker_5d6a5dbc7a8cd71bddfd3872b1b2a98f = L.circleMarker(
+                [40.715, -73.94],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_49b75af70a7e8f637bd0af74d0677545 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bf07c74295c84dacb0cd98c558a136ff = $(`<div id="html_bf07c74295c84dacb0cd98c558a136ff" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Brooklyn: East Williamsburg</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 36,813)</span><br>                 <b>Total Pickups:</b> 8,308<br>                 <b>Total Dropoffs:</b> 45,121<br>                 <b>Net Flow:</b> +36,813<br>                 <b>Avg Fare:</b> $38.31             </div>             </div>`)[0];
+                popup_49b75af70a7e8f637bd0af74d0677545.setContent(html_bf07c74295c84dacb0cd98c558a136ff);
+            
+        
+
+        circle_marker_5d6a5dbc7a8cd71bddfd3872b1b2a98f.bindPopup(popup_49b75af70a7e8f637bd0af74d0677545)
+        ;
+
+        
+    
+    
+            var circle_marker_6c110d44fa8ace440e04ef0f0aab2fad = L.circleMarker(
+                [40.69, -73.995],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_6386f41f8902548ceb5f95630719d442 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7868cccf702d30dc92951b9d55adda44 = $(`<div id="html_7868cccf702d30dc92951b9d55adda44" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Brooklyn: Brooklyn Heights</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 82,802)</span><br>                 <b>Total Pickups:</b> 15,950<br>                 <b>Total Dropoffs:</b> 98,752<br>                 <b>Net Flow:</b> +82,802<br>                 <b>Avg Fare:</b> $31.86             </div>             </div>`)[0];
+                popup_6386f41f8902548ceb5f95630719d442.setContent(html_7868cccf702d30dc92951b9d55adda44);
+            
+        
+
+        circle_marker_6c110d44fa8ace440e04ef0f0aab2fad.bindPopup(popup_6386f41f8902548ceb5f95630719d442)
+        ;
+
+        
+    
+    
+            var circle_marker_ef79387b8d108c8b946f8add5042ca83 = L.circleMarker(
+                [40.765, -73.925],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_122349b7c9516f446404eb787d37766a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_de254c627f25834930c562fddc562d1c = $(`<div id="html_de254c627f25834930c562fddc562d1c" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Queens: Astoria</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 60,756)</span><br>                 <b>Total Pickups:</b> 15,875<br>                 <b>Total Dropoffs:</b> 76,631<br>                 <b>Net Flow:</b> +60,756<br>                 <b>Avg Fare:</b> $28.12             </div>             </div>`)[0];
+                popup_122349b7c9516f446404eb787d37766a.setContent(html_de254c627f25834930c562fddc562d1c);
+            
+        
+
+        circle_marker_ef79387b8d108c8b946f8add5042ca83.bindPopup(popup_122349b7c9516f446404eb787d37766a)
+        ;
+
+        
+    
+    
+            var circle_marker_d9d73a43e7b0d8d547af191ec138e138 = L.circleMarker(
+                [40.6895, -74.1745],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_ec9ef900a2578199aa0871cd13c59d11 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_07b7848c749e59592d57f28c6b638e34 = $(`<div id="html_07b7848c749e59592d57f28c6b638e34" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">EWR: Newark Airport</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 80,677)</span><br>                 <b>Total Pickups:</b> 1,337<br>                 <b>Total Dropoffs:</b> 82,014<br>                 <b>Net Flow:</b> +80,677<br>                 <b>Avg Fare:</b> $99.91             </div>             </div>`)[0];
+                popup_ec9ef900a2578199aa0871cd13c59d11.setContent(html_07b7848c749e59592d57f28c6b638e34);
+            
+        
+
+        circle_marker_d9d73a43e7b0d8d547af191ec138e138.bindPopup(popup_ec9ef900a2578199aa0871cd13c59d11)
+        ;
+
+        
+    
+    
+            var circle_marker_e26df17738af63132c9e740d6c404301 = L.circleMarker(
+                [40.7753, -73.9818],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.638626666666666, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_758a9162db9e40a5834b3d3b3afead4f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_11cb2ad82b9e8ec7c44e7d83faa25d25 = $(`<div id="html_11cb2ad82b9e8ec7c44e7d83faa25d25" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Lincoln Square East</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 140,444)</span><br>                 <b>Total Pickups:</b> 1,145,794<br>                 <b>Total Dropoffs:</b> 1,005,350<br>                 <b>Net Flow:</b> -140,444<br>                 <b>Avg Fare:</b> $22.48             </div>             </div>`)[0];
+                popup_758a9162db9e40a5834b3d3b3afead4f.setContent(html_11cb2ad82b9e8ec7c44e7d83faa25d25);
+            
+        
+
+        circle_marker_e26df17738af63132c9e740d6c404301.bindPopup(popup_758a9162db9e40a5834b3d3b3afead4f)
+        ;
+
+        
+    
+    
+            var circle_marker_e973769666d0efe09559305ae51ed448 = L.circleMarker(
+                [40.734, -74.003],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.069113333333333, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_1c7c61070ed509b06fb27b50d05c0cc7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c561baf2ab9cadb55bb5c94c2c8680a0 = $(`<div id="html_c561baf2ab9cadb55bb5c94c2c8680a0" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: West Village</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 138,735)</span><br>                 <b>Total Pickups:</b> 760,367<br>                 <b>Total Dropoffs:</b> 621,632<br>                 <b>Net Flow:</b> -138,735<br>                 <b>Avg Fare:</b> $23.57             </div>             </div>`)[0];
+                popup_1c7c61070ed509b06fb27b50d05c0cc7.setContent(html_c561baf2ab9cadb55bb5c94c2c8680a0);
+            
+        
+
+        circle_marker_e973769666d0efe09559305ae51ed448.bindPopup(popup_1c7c61070ed509b06fb27b50d05c0cc7)
+        ;
+
+        
+    
+    
+            var circle_marker_2109f20496be490519e1c621276c0c5b = L.circleMarker(
+                [40.7781, -73.9554],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.564033333333333, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_f854f79002a1c85890e44556cb40b7af = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7e2e20d8caeec56a2a01699d3a2eea99 = $(`<div id="html_7e2e20d8caeec56a2a01699d3a2eea99" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Upper East Side North</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 91,756)</span><br>                 <b>Total Pickups:</b> 1,584,605<br>                 <b>Total Dropoffs:</b> 1,676,361<br>                 <b>Net Flow:</b> +91,756<br>                 <b>Avg Fare:</b> $21.15             </div>             </div>`)[0];
+                popup_f854f79002a1c85890e44556cb40b7af.setContent(html_7e2e20d8caeec56a2a01699d3a2eea99);
+            
+        
+
+        circle_marker_2109f20496be490519e1c621276c0c5b.bindPopup(popup_f854f79002a1c85890e44556cb40b7af)
+        ;
+
+        
+    
+    
+            var circle_marker_5f24a482339733a8002ef5d2d0c25210 = L.circleMarker(
+                [40.6413, -73.7781],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.54616, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_dbe6bd3d5d26b1400db97a9e4228ffbc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f71b5cad7320c7a2f6be489a23c9ec41 = $(`<div id="html_f71b5cad7320c7a2f6be489a23c9ec41" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Queens: JFK Airport</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 1,533,184)</span><br>                 <b>Total Pickups:</b> 1,881,924<br>                 <b>Total Dropoffs:</b> 348,740<br>                 <b>Net Flow:</b> -1,533,184<br>                 <b>Avg Fare:</b> $81.94             </div>             </div>`)[0];
+                popup_dbe6bd3d5d26b1400db97a9e4228ffbc.setContent(html_f71b5cad7320c7a2f6be489a23c9ec41);
+            
+        
+
+        circle_marker_5f24a482339733a8002ef5d2d0c25210.bindPopup(popup_dbe6bd3d5d26b1400db97a9e4228ffbc)
+        ;
+
+        
+    
+    
+            var circle_marker_cdc54d45a89e5badd51a59b824688fcc = L.circleMarker(
+                [40.7769, -73.874],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.181266666666666, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_b65cc79f1ae35c2cfd040e63bb32f03e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a650fc3d4855a97f97bb248ea65c6204 = $(`<div id="html_a650fc3d4855a97f97bb248ea65c6204" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Queens: LaGuardia Airport</h4>                 <b>Status:</b> <span style="color:#d62728;">Deficit (Pickups > Dropoffs by 835,939)</span><br>                 <b>Total Pickups:</b> 1,227,190<br>                 <b>Total Dropoffs:</b> 391,251<br>                 <b>Net Flow:</b> -835,939<br>                 <b>Avg Fare:</b> $70.45             </div>             </div>`)[0];
+                popup_b65cc79f1ae35c2cfd040e63bb32f03e.setContent(html_a650fc3d4855a97f97bb248ea65c6204);
+            
+        
+
+        circle_marker_cdc54d45a89e5badd51a59b824688fcc.bindPopup(popup_b65cc79f1ae35c2cfd040e63bb32f03e)
+        ;
+
+        
+    
+    
+            var circle_marker_8f836c462c263c8fe2c081c827d9d2fc = L.circleMarker(
+                [40.704, -74.013],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_a352a92c9af9282cfef052c34ee813b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f047cb5622cfc1fcbc59cda4df9417a5 = $(`<div id="html_f047cb5622cfc1fcbc59cda4df9417a5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Financial District South</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 35,692)</span><br>                 <b>Total Pickups:</b> 103,193<br>                 <b>Total Dropoffs:</b> 138,885<br>                 <b>Net Flow:</b> +35,692<br>                 <b>Avg Fare:</b> $34.42             </div>             </div>`)[0];
+                popup_a352a92c9af9282cfef052c34ee813b4.setContent(html_f047cb5622cfc1fcbc59cda4df9417a5);
+            
+        
+
+        circle_marker_8f836c462c263c8fe2c081c827d9d2fc.bindPopup(popup_a352a92c9af9282cfef052c34ee813b4)
+        ;
+
+        
+    
+    
+            var circle_marker_dacf1edab1601bb07e8b4ec7cbfe2e48 = L.circleMarker(
+                [40.778, -73.988],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_4d69f8409c1a12c72c59da521046be7e);
+        
+    
+        var popup_8e2b9bd66085e6cc18cc76d2924df7ec = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5c5920adf713a4d10e24c89568b9eaa7 = $(`<div id="html_5c5920adf713a4d10e24c89568b9eaa7" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #1c3d5a;">Manhattan: Lincoln Square West</h4>                 <b>Status:</b> <span style="color:#2ca02c;">Surplus (Dropoffs > Pickups by 172,868)</span><br>                 <b>Total Pickups:</b> 357,763<br>                 <b>Total Dropoffs:</b> 530,631<br>                 <b>Net Flow:</b> +172,868<br>                 <b>Avg Fare:</b> $21.62             </div>             </div>`)[0];
+                popup_8e2b9bd66085e6cc18cc76d2924df7ec.setContent(html_5c5920adf713a4d10e24c89568b9eaa7);
+            
+        
+
+        circle_marker_dacf1edab1601bb07e8b4ec7cbfe2e48.bindPopup(popup_8e2b9bd66085e6cc18cc76d2924df7ec)
+        ;
+
+        
+    
+    
+            feature_group_4d69f8409c1a12c72c59da521046be7e.addTo(map_7fdc4c26e7ecfa5d30391324bfaa8f6b);
+        
+    
+            var layer_control_c0e79d85ee3a2c635ef7933158b0cbe9_layers = {
+                base_layers : {
+                    "CartoDB Light (Default)" : tile_layer_92ea4bb782013552aaf5092cfbf75bb7,
+                    "CartoDB Dark (Night Mode)" : tile_layer_474a4db8220e1455f938796db5b0c6c8,
+                    "Esri Streets" : tile_layer_3514df4d34b457474c4e27c2e46f4f2b,
+                },
+                overlays :  {
+                    "\ud83d\udd25 Pickup Density Heatmap" : heat_map_c68b3bc2f9f36263227a8e140b0e48fb,
+                    "Zone Net Flow Markers" : feature_group_4d69f8409c1a12c72c59da521046be7e,
+                },
+            };
+            let layer_control_c0e79d85ee3a2c635ef7933158b0cbe9 = L.control.layers(
+                layer_control_c0e79d85ee3a2c635ef7933158b0cbe9_layers.base_layers,
+                layer_control_c0e79d85ee3a2c635ef7933158b0cbe9_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_7fdc4c26e7ecfa5d30391324bfaa8f6b);
+
+        
+</script>
+</html>

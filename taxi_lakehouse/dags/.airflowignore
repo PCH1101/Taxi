@@ -1,0 +1,4 @@
+scripts/.*
+utils/.*
+__pycache__/.*
+^\..*

@@ -1,0 +1,37 @@
+# ── Secrets & credentials ────────────────────────────────────────────────────
+.env
+*.agents/
+
+# ── Large data files (download locally, never commit) ────────────────────────
+data/*.parquet
+data/*.csv
+data/*.json
+data/*.gz
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.python-version
+*.egg-info/
+dist/
+build/
+
+# ── Jupyter & Logs ────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+logs/
+*.log
+
+
+# ── Docker volumes (if bind-mounted locally) ─────────────────────────────────
+minio-data/
+polaris-data/
+postgres-data/
+
+# ── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
